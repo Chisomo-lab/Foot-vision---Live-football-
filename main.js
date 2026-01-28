@@ -1,24 +1,12 @@
-// Unified Main JS for FootVision
 document.addEventListener('DOMContentLoaded', () => {
-  // Live Matches page
-  if (document.getElementById('matches')) {
-    loadMatches();
-  }
-
-  // Highlights page
-  if (document.getElementById('highlights')) {
-    loadHighlights();
-  }
-
-  // News page
-  if (document.getElementById('news-list')) {
-    loadNews();
-  }
+  if (document.getElementById('matches')) loadMatches();
+  if (document.getElementById('highlights')) loadHighlights();
+  if (document.getElementById('news-list')) loadNews();
 });
 
-// -----------------------
-// Live Matches Functions
-// -----------------------
+// --------------------
+// Live Matches
+// --------------------
 async function loadMatches() {
   const matchesDiv = document.getElementById("matches");
   matchesDiv.innerHTML = '<p>Loading live matches...</p>';
@@ -33,7 +21,7 @@ async function loadMatches() {
     }
 
     data.response.forEach(match => {
-      const card = createMatchCard(match, true); // true = live match
+      const card = createMatchCard(match, true);
       matchesDiv.appendChild(card);
       simulateMatch(match.fixture.id);
       const ball = card.querySelector('.ball');
@@ -46,9 +34,9 @@ async function loadMatches() {
   }
 }
 
-// -----------------------
-// Highlights Functions
-// -----------------------
+// --------------------
+// Highlights
+// --------------------
 async function loadHighlights() {
   const container = document.getElementById('highlights');
   container.innerHTML = '<p>Loading highlights...</p>';
@@ -64,7 +52,7 @@ async function loadHighlights() {
     }
 
     finished.forEach(match => {
-      const card = createMatchCard(match, false, 'Full Time'); // false = not live
+      const card = createMatchCard(match, false, 'Full Time');
       container.appendChild(card);
     });
   } catch (err) {
@@ -73,9 +61,9 @@ async function loadHighlights() {
   }
 }
 
-// -----------------------
-// News Functions (placeholder)
-// -----------------------
+// --------------------
+// News (Placeholder)
+// --------------------
 function loadNews() {
   const newsList = document.getElementById('news-list');
   newsList.innerHTML = `
@@ -85,9 +73,9 @@ function loadNews() {
   `;
 }
 
-// -----------------------
-// Utility: Create Match Card
-// -----------------------
+// --------------------
+// Utility: Match Card
+// --------------------
 function createMatchCard(match, live = false, minuteText = null) {
   const card = document.createElement('div');
   card.className = 'match-card';
@@ -116,9 +104,9 @@ function createMatchCard(match, live = false, minuteText = null) {
   return card;
 }
 
-// -----------------------
-// Ball Simulation
-// -----------------------
+// --------------------
+// Mini-field Simulation
+// --------------------
 function simulateMatch(matchId) {
   const card = document.getElementById(`match-${matchId}`);
   const ball = card.querySelector('.ball');
@@ -138,9 +126,9 @@ function simulateMatch(matchId) {
   }, 2000);
 }
 
-// -----------------------
-// Ball Glow Effect
-// -----------------------
+// --------------------
+// Glow Effect
+// --------------------
 function ballGlowEffect(ball, card) {
   const homeImg = card.querySelector('.team img:first-child');
   const awayImg = card.querySelector('.team img:last-child');
