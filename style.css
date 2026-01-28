@@ -1,0 +1,39 @@
+body { margin: 0; font-family: Arial, sans-serif; background: #0f172a; color: #fff; }
+.nav { display: flex; justify-content: space-between; padding: 15px; background: #020617; }
+.nav ul { display: flex; list-style: none; gap: 15px; }
+.nav a { color: #38bdf8; text-decoration: none; }
+.nav a.active { color: #facc15; }
+
+.filters { padding: 10px; background: #020617; }
+.matches { padding: 15px; }
+.match-card { background: #020617; margin-bottom: 10px; padding: 10px; border-radius: 8px; transition: all 0.3s ease; }
+.match-card:hover { transform: translateY(-4px); box-shadow: 0 4px 12px rgba(255,255,255,0.2); }
+
+.teams { display: flex; justify-content: space-between; align-items: center; }
+.team { display: flex; align-items: center; gap: 6px; }
+.team img { width: 40px; height: 40px; transition: transform 0.3s, box-shadow 0.3s; }
+.team img.glow { box-shadow: 0 0 12px #facc15; transform: scale(1.2); }
+
+.score { font-size: 22px; font-weight: bold; }
+.minute { margin-top: 6px; color: #22c55e; font-weight: bold; }
+
+.mini-field { width: 200px; height: 80px; background: linear-gradient(#064e3b, #047857); position: relative; border-radius: 4px; margin: 8px 0; overflow: hidden; box-shadow: inset 0 0 5px #000; }
+.ball { width: 14px; height: 14px; background: gold; border-radius: 50%; position: absolute; top: 34px; left: 94px; transition: all 0.5s ease-in-out; box-shadow: 0 0 6px gold; }
+
+.possession { display: flex; width: 200px; height: 8px; background: #1f2937; border-radius: 4px; overflow: hidden; margin-bottom: 12px; }
+.home-bar { background: #2563eb; width: 50%; transition: width 0.5s ease-in-out; }
+.away-bar { background: #ef4444; width: 50%; transition: width 0.5s ease-in-out; }
+
+.links a { color: #38bdf8; text-decoration: none; }
+.links a:hover { color: #facc15; text-decoration: underline; }
+
+.pay-btn { padding: 10px; background: gold; border: none; font-weight: bold; cursor: pointer; }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .teams { flex-direction: column; align-items: flex-start; }
+  .match-card { padding: 8px; }
+  .mini-field { width: 100%; height: 60px; }
+  .possession { width: 100%; }
+  .nav ul { flex-direction: column; gap: 8px; }
+}
