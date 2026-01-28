@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Highlights | FootVision</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <nav class="nav">
+    <h2 class="logo">FootVision</h2>
+    <ul>
+      <li><a href="index.html">Live</a></li>
+      <li><a href="highlights.html" class="active">Highlights</a></li>
+      <li><a href="news.html">News</a></li>
+      <li><a href="analysis.html">Analysis</a></li>
+    </ul>
+  </nav>
+
+  <main class="matches" id="highlights">
+    <p>Loading highlights...</p>
+  </main>
+
+  <script src="js/main.js"></script>
+  <script>
+    // Example: load only finished matches as highlights
+    async function loadHighlights() {
+      try {
+        const res = await fetch('/.netlify/functions/liveMatches');
+        const data = await res.json();
+        const finished = data.response.filter(match => match.fixture.status.short === 'FT');
+
+        const container = document.getElementById('highlights');
+        container.innerHTML = '';
+
+        if (!finished.length) {
+          container.innerHTML = '<p>No highlights available yet.</p>';
+          return;
+        }
+
+        finished.forEach(match => {
+          const card = document.createElement('div');
+          card.className = 'match-card';
+          card.innerHTML = `
+            <div class="teams">
+              <div class="team">
+                <img src="${match.teams.home.logo}" alt="${match.teams.home.name}">
+                <strong>${match.teams.home.name}</strong>
+              </div>
+              <div class="score">${match.goals.home} - ${match.goals.away}</div>
+              <div class="team">
+                <strong>${match.teams.away.name}</strong>
+                <img src="${match.teams.away.logo}" alt="${match.teams.away.name}">
+              </div>
+            </div>
+            <div class="minute">Full Time</div>
+            <div class="links">
+              <a href="watch.html">Watch Highlights</a>
+            </div>
+          `;
+          container.appendChild(card);
+        });
+      } catch(err) {
+        console.error(err);
+      }
+    }
+
+    loadHighlights();
+  </script>
+</body>
+</html>
